@@ -1,0 +1,20 @@
+import cv2
+import numpy as np
+
+# Load images
+image1 = cv2.imread('Image1.bmp', cv2.IMREAD_GRAYSCALE)
+image2 = cv2.imread('Image2.bmp', cv2.IMREAD_GRAYSCALE)
+
+# Compute the absolute difference
+difference = cv2.absdiff(image2, image1)
+
+# Apply threshold
+threshold_value = 30  # Example threshold value
+_, change_map = cv2.threshold(difference, threshold_value, 255, cv2.THRESH_BINARY)
+
+# Optional: Apply median filter to reduce noise
+change_map_filtered = cv2.medianBlur(change_map, 5)
+
+# Save or display the change map
+cv2.imwrite('ChangeMap.bmp', change_map_filtered)
+# or use cv2.imshow('Change Map', change_map_filtered) to display
